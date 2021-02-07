@@ -1,3 +1,13 @@
+// Expecting following components:
+// LoopTimer: Timer to loop this script
+// ProgBlock: self programmable block
+// DebugDisplay: Log of this script
+
+// AssemblerAutomatic: Script will push new jobs to this assembler if it exists
+// P_ResourceDisplay_Display: LCDs to view the data
+// --> to view everything, name it "P_ResourceDisplay_Display."
+// --> to view e.g. ores, name it "P_ResourceDisplay_DisplayO."
+
 const string ASSEMB_NAME = "AssemblerAutomatic";
 const string TIMER = "P_ResourceDisplay_LoopTimer";
 const string DEBUG_NAME = "P_DebugDisplay";
@@ -175,7 +185,7 @@ private void DisplayGases(Dictionary<string, VRage.MyFixedPoint> resources, stri
 
 private string PercentageBar(double percentage, int width)
 {
-    return "[" + new String('#', (int)(width * percentage)) + new String('_', (int)(width * (1-percentage))) + "]";
+    return "[" + new String('#', (int)(width * percentage)) + new String('_', (int)(width * Math.Min(1-percentage, 0))) + "]";
 }
 
 private void DisplayResourceTargets(Dictionary<string, VRage.MyFixedPoint> resources, string targetDisplayName, string header, List<string> allowedResDisplay)
